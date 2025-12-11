@@ -7,31 +7,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
+          fetch-depth: 0
           submodules: recursive
+
       - name: Setup Java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
-          java-version: 11
+          java-version: 17
+          distribution: 'temurin'
+          cache: gradle
+
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-      - name: Build
-        run: ./gradlew assembleRelease
+        uses: android-actions/setup-android@v3
+
+      - name: Build Android
+        run: ./gradlew assembleDebug
         working-directory: android
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDirectory: android/app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+      - name: Extract branch name
+        shell: bash
+        id: extract_branch
+        run: echo "branch=$(echo ${GITHUB_REF#refs/heads/} | tr '/' '_')" >> $GITHUB_OUTPUT
+
+      - name: Rename APK
+        run: mv android/app/build/outputs/apk/debug/app-debug.apk android/app/build/outputs/apk/debug/striker-android.apk
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: Android
-          path: android/app/build/outputs/apk/release/app-release-unsigned-signed.apk
+          name: striker-${{ steps.extract_branch.outputs.branch }}-android
+          path: android/app/build/outputs/apk/debug/striker-android.apk
+
   windows:
     name: Windows
     runs-on: windows-latest
