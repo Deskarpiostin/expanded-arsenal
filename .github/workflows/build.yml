@@ -28,7 +28,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Android
           path: android/app/build/outputs/apk/release/app-release-unsigned-signed.apk
@@ -37,7 +37,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Setup Visual Studio
@@ -51,7 +51,7 @@ jobs:
         run: python makepak.py pak/ extras.pak
         working-directory: android/app
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Windows
           path: |
@@ -63,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install dependencies
@@ -83,7 +83,7 @@ jobs:
         run: python makepak.py pak/ extras.pak
         working-directory: android/app
       - name: Upload artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: Linux
           path: |
@@ -96,7 +96,7 @@ jobs:
     needs: [android, windows, linux]
     steps:
       - name: Fetch artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
       - name: Repackage binaries
         run: |
           mv Android/app-release-unsigned-signed.apk expanded-arsenal.apk
