@@ -1,6 +1,6 @@
 Fork of Velaron Expanded Arsenal port.
 
-# Expanded Arsenal [![Build Status](https://github.com/Velaron/expanded-arsenal/actions/workflows/build.yml/badge.svg)](https://github.com/Velaron/expanded-arsenal/actions) <img align="right" width="128" height="128" src="https://github.com/Velaron/expanded-arsenal/raw/main/android/app/src/main/ic_launcher-playstore.png" alt="Expanded Arsenal" />
+# Expanded Arsenal [![Build Status](https://github.com/Deskarpiostin/expanded-arsenal/actions/workflows/build.yml/badge.svg)](https://github.com/Velaron/expanded-arsenal/actions) <img align="right" width="128" height="128" src="https://github.com/Velaron/expanded-arsenal/raw/main/android/app/src/main/ic_launcher-playstore.png" alt="Expanded Arsenal" />
 Expanded Arsenal: Android port.
 
 ## Donate
