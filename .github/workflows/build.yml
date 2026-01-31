@@ -15,12 +15,12 @@ jobs:
         with:
           java-version: 11
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v4
+        uses: android-actions/setup-android@v2
       - name: Build
         run: ./gradlew assembleRelease
         working-directory: android
       - name: Sign APK
-        uses: r0adkll/sign-android-release@v2
+        uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: android/app/build/outputs/apk/release
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
