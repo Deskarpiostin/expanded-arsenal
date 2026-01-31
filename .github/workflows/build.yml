@@ -2,7 +2,6 @@ name: Build
 on: [push]
 
 jobs:
-jobs:
   android:
     name: Android
     runs-on: ubuntu-latest
